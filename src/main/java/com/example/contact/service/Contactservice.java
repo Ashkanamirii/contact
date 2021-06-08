@@ -49,8 +49,12 @@ public class Contactservice {
 
     public Contact updateUser(Contact contact) {
         Contact u = repository.findById(contact.getId()).orElse(null);
-        assert u != null;
-        return repository.save(u);
+        if(u != null){
+            u.setName(contact.getName());
+            u.setEmail(contact.getEmail());
+            return repository.save(u);
+        }
+       return null;
     }
 
     public Contact deleteUser(Contact contact) {
